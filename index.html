@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <!--<link rel="stylesheet" href="">-->
 <style>
+    body {
+        font-family: Arial,sans-serif;
+    }
+
     .box .super .button {
         display: block;
         width: 100%;
@@ -79,6 +83,146 @@
         color: white;
     }
 
+    dialog[open] {
+        display: flex;
+    }
+
+    dialog.maximized {
+        width: 100%;
+        max-width: 1150px;
+        height: 100dvh;
+        max-height: unset;
+    }
+
+    dialog {
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 0;
+        width: 98vw;
+        height: 75dvh;
+        max-width: 640px;
+        max-height: 640px;
+        border: 0;
+        border-radius: 3px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, .5);
+    }
+
+    dialog .dialog-scroll {
+        flex: 1;
+        padding: 1vw 2vw;
+        overflow-y: auto;
+    }
+
+    dialog .box.slim {
+        margin: 15px 0;
+    }
+
+    .box.slim {
+        gap: 15px;
+        margin: 30px 0;
+    }
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin: 60px 0;
+        position: relative;
+        padding: 0;
+        background-color: transparent;
+    }
+
+    .form-container .flex-row {
+        display: flex;
+        gap: 10px;
+        flex-direction: row;
+        flex: 1;
+    }
+
+    .box .super {
+        flex: 0 1 calc(20% - 8px);
+        position: relative;
+    }
+
+    .box .section.grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .form-container .box .section {
+        padding: 5px;
+    }
+    .box .section:has(> h5) {
+        background: darkgray;
+        border-top-left-radius: 0;
+        margin: 20px 0 0;
+    }
+    .box .section {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        gap: 10px;
+        position: relative;
+        padding: 5px;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        background: darkgray;
+        filter: drop-shadow(0px 1px 1px rgba(128, 128, 128, .3));
+    }
+
+    .form-container .flex-row > * {
+        flex: 1;
+    }
+
+    .box .section.grid-2 p {
+        grid-column: span 2;
+    }
+    .form-container .box .section p {
+        margin: 5px 0;
+        font-size: 80%;
+        text-align: justify;
+    }
+    .box p {
+        margin: 0 0 10px;
+        text-align: left;
+    }
+    p {
+        margin: 1em 0;
+        text-align: justify;
+    }
+
+    .form-container .box .section h5 {
+        background: #3f3f3f;
+        color: white;
+        text-shadow: 0 0 2px black;
+    }
+    .box .section h5 {
+        position: absolute;
+        overflow: hidden;
+        top: -20px;
+        left: -1px;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin: 0;
+        background-color: #3f3f3f;
+        background-image: linear-gradient(to top, white, #3f3f3f 3px);
+        color: white;
+        font-weight: bold;
+        font-size: 13px;
+        line-height: 18px;
+        border-radius: 3px 0 0 0;
+        padding: 0 25px 1px 5px;
+        white-space: nowrap;
+        clip-path: polygon(0 0, calc(100% - 25px) 0, calc(100% - 22px) 1px, 100% 101%, 0 101%);
+        filter: drop-shadow(0px 1px 1px rgba(128, 128, 128, .3));
+    }
+    h5 {
+        font-size: 0.8em;
+        margin: 0.4em 0;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: lighter;
+    }
+
 </style>
 <!--<script src=""></script>-->
 <body>
@@ -87,23 +231,47 @@
     <h1>This is a form with labels</h1>
     <form method="get">
         <div class="form-container">
-            <label class="button radio"><span>Such a nice radio</span><input id="radio11" type="radio" name="radio1[]"></label>
-            <br/>
-            <label class="button radio"><span>Indeed!</span><input id="radio12" type="radio" name="radio1[]"></label>
+            <div class="box slim">
+                <div class="flex-row">
+                    <div class="section grid-2">
+                        <h5><label>Public</label></h5>
+                        <p class="help-text">Description here</p>
+                        <div class="super">
+                            <label class="button radio"><span>Such a nice radio</span><input id="radio11" type="radio" name="radio1[]" checked></label>
+                        </div>
+                        <div class="super">
+                            <label class="button radio"><span>Indeed!</span><input id="radio12" type="radio" name="radio1[]"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 </div>
 
 <dialog id="dialog">
-    <h2>This is a form in a dialog with labels</h2>
-    <form method="get">
-        <div class="form-container">
-            <label class="button radio"><span>Such a nice radio</span><input id="radio21" type="radio" name="radio2[]"></label>
-            <br/>
-            <label class="button radio"><span>Indeed!</span><input id="radio22" type="radio" name="radio2[]"></label>
-        </div>
-    </form>
-    <p>Close by using Escape key</p>
+    <div class="dialog-scroll">
+        <h2>This is a form in a dialog with labels</h2>
+        <form method="get">
+            <div class="form-container">
+                <div class="box slim">
+                    <div class="flex-row">
+                        <div class="section grid-2">
+                            <h5><label>Public</label></h5>
+                            <p class="help-text">Description here</p>
+                            <div class="super">
+                                <label class="button radio"><span>Such a nice radio</span><input id="radio21" type="radio" name="radio2[]" checked></label>
+                            </div>
+                            <div class="super">
+                                <label class="button radio"><span>Indeed!</span><input id="radio22" type="radio" name="radio2[]"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <p>Close by using Escape key</p>
+    </div>
 </dialog>
 <p>
 <a href="#" onclick="document.getElementById('dialog').showModal();">Show Dialog</a>
