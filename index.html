@@ -223,6 +223,49 @@
         font-weight: lighter;
     }
 
+    dialog .dialog-inner {
+        margin: 0 0 10px 0;
+    }
+    dialog .dialog-inner > :first-child {
+        margin-top: 0;
+    }
+    dialog .dialog-title {
+        padding: 5px 5px 5px 2vw;
+        min-height: 22px;
+        background: #3f3f3f;
+        color: white;
+    }
+    dialog [data-dialog-title] {
+        touch-action: none;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+    dialog .dialog-buttons {
+        display: flex
+    ;
+        flex-direction: row;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    dialog .dialog-buttons button:first-child {
+        border-radius: 0 0 0 6px;
+    }
+    dialog.maximized .maximize {
+        background: green;
+    }
+    dialog .dialog-buttons button {
+        border: 0;
+        border-radius: 0;
+        padding: 14px;
+        width: 17px;
+        height: 17px;
+        background: #333333;
+        color: #3f3f3f;
+        font-weight: bold;
+    }
 </style>
 <!--<script src=""></script>-->
 <body>
@@ -237,10 +280,10 @@
                         <h5><label>Public</label></h5>
                         <p class="help-text">Description here</p>
                         <div class="super">
-                            <label class="button radio"><span>Such a nice radio</span><input id="radio11" type="radio" name="radio1[]" checked></label>
+                            <label class="button radio">Such a nice radio<input id="radio11" type="radio" name="radio1[]" checked></label>
                         </div>
                         <div class="super">
-                            <label class="button radio"><span>Indeed!</span><input id="radio12" type="radio" name="radio1[]"></label>
+                            <label class="button radio">Indeed!<input id="radio12" type="radio" name="radio1[]"></label>
                         </div>
                     </div>
                 </div>
@@ -250,27 +293,36 @@
 </div>
 
 <dialog id="dialog">
+    <div class="dialog-title" data-dialog-title="">
+        <h2>Finish measurement</h2>
+        <div class="dialog-buttons">
+            <button class="maximize" title="Maximize" data-action="click-&gt;dialog#maximize:prevent:stop"><i class="icofont-window"></i></button>
+            <button class="close" title="Close" data-action="click-&gt;dialog#close:prevent:stop"><i class="icofont-delete"></i></button>
+        </div>
+    </div>
     <div class="dialog-scroll">
-        <h2>This is a form in a dialog with labels</h2>
-        <form method="get">
-            <div class="form-container">
-                <div class="box slim">
-                    <div class="flex-row">
-                        <div class="section grid-2">
-                            <h5><label>Public</label></h5>
-                            <p class="help-text">Description here</p>
-                            <div class="super">
-                                <label class="button radio"><span>Such a nice radio</span><input id="radio21" type="radio" name="radio2[]" checked></label>
-                            </div>
-                            <div class="super">
-                                <label class="button radio"><span>Indeed!</span><input id="radio22" type="radio" name="radio2[]"></label>
+        <div class="dialog-inner">
+            <h2>This is a form in a dialog with labels</h2>
+            <form method="get">
+                <div data-controller="condition">
+                    <div class="form-container">
+                        <div class="box slim">
+                            <div class="section grid-2">
+                                <h5><label>Public</label></h5>
+                                <p class="help-text">Description here</p>
+                                <div class="super">
+                                    <label class="button radio">Such a nice radio<input id="radio21" type="radio" name="radio2[]" checked></label>
+                                </div>
+                                <div class="super">
+                                    <label class="button radio">Indeed!<input id="radio22" type="radio" name="radio2[]"></label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-        <p>Close by using Escape key</p>
+            </form>
+            <p>Close by using Escape key</p>
+        </div>
     </div>
 </dialog>
 <p>
